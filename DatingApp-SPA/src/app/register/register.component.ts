@@ -2,9 +2,9 @@ import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
 
 @Component({
-  selector: "app-register",
-  templateUrl: "./register.component.html",
-  styleUrls: ["./register.component.css"]
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
   @Output()
@@ -18,20 +18,22 @@ export class RegisterComponent implements OnInit {
   login() {
     this.authService.login(this.model).subscribe(
       next => {
-        console.log("Logged in successfully");
+        console.log('Logged in successfully');
       },
       error => {
-        console.log("Failed to login");
+        console.log(error);
       }
     );
   }
 
   register() {
-    this.authService.register(this.model).subscribe(() => {
-        console.log("Registered successfully");
+    this.authService.register(this.model).subscribe(
+      () => {
+        console.log('Registered successfully');
         // this.login();
-      }, error => {
-        console.error('Error: ' + error.error );
+      },
+      error => {
+        console.log(error);
       }
     );
   }
