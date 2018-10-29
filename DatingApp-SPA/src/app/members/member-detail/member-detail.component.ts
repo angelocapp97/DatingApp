@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../../_models/user';
 import { UserService } from '../../_services/user.service';
 import { ActivatedRoute } from '@angular/router';
+import { TabsModule } from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-member-detail',
@@ -16,15 +17,17 @@ export class MemberDetailComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.loadUser();
-  }
-
-  loadUser() {
-    this.userService.getUser(+this.route.snapshot.params['id']).subscribe((user: User) => {
-      this.user = user;
-    }, error => {
-      this.alertify.error(error);
+    this.route.data.subscribe(data => {
+      this.user = data['user'];
     });
   }
+
+  // loadUser() {
+  //   this.userService.getUser(+this.route.snapshot.params['id']).subscribe((user: User) => {
+  //     this.user = user;
+  //   }, error => {
+  //     this.alertify.error(error);
+  //   });
+  // }
 
 }
